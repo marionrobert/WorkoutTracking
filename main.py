@@ -49,15 +49,28 @@ for exercise in exercises:
 
 
     # # # Basic Authentication
-    bearer_headers = {
-        "Authorization": os.environ["BASIC_AUTH"]
+    # bearer_headers = {
+    #     "Authorization": os.environ["BASIC_AUTH"]
+    #
+    # }
+    #
+    # response_post = requests.post(
+    #     SHEETY_ENDPOINT,
+    #     json=SHEETY_PARAMS,
+    #     headers=bearer_headers
+    # )
+    # print(response_post.text)
 
+
+    # # Bearer Token Authentication
+    bearer_headers = {
+        "Authorization": os.environ["BEARER_AUTH"]
     }
 
     response_post = requests.post(
-        SHEETY_ENDPOINT,
-        json=SHEETY_PARAMS,
-        headers=bearer_headers
+        url=SHEETY_ENDPOINT,
+        headers=bearer_headers,
+        json=SHEETY_PARAMS
     )
     print(response_post.text)
 
