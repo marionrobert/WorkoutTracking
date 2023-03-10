@@ -24,3 +24,25 @@ NUTRITIONIX_PARAMS = {
 
 response = requests.post(url=NUTRITIONIX_ENDPOINT, headers=HEADERS, json=NUTRITIONIX_PARAMS)
 result = response.json()
+exercises = result["exercises"]
+
+today = datetime.now().strftime("%d/%m/%Y")
+now_time = datetime.now().strftime("%X")
+
+for exercise in exercises:
+    SHEETY_PARAMS = {
+        "workout": {
+          "date": today,
+          "time": now_time,
+          "exercise": exercise['name'].title(),
+          "duration": exercise['duration_min'],
+          "calories": exercise['nf_calories'],
+          "id": 2
+        }
+    }
+
+    SHEETY_ENDPOINT = "https://api.sheety.co/075a1aa8ceadab13ed826945168b2fff/workoutTracking/workouts"
+
+    # without authentication
+    response_post = requests.post(SHEETY_ENDPOINT, json=SHEETY_PARAMS)
+    print(response_post.text)
