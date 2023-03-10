@@ -43,6 +43,24 @@ for exercise in exercises:
 
     SHEETY_ENDPOINT = "https://api.sheety.co/075a1aa8ceadab13ed826945168b2fff/workoutTracking/workouts"
 
-    # without authentication
-    response_post = requests.post(SHEETY_ENDPOINT, json=SHEETY_PARAMS)
+    # # without authentication
+    # response_post = requests.post(SHEETY_ENDPOINT, json=SHEETY_PARAMS)
+    # print(response_post.text)
+
+
+    # # # Basic Authentication
+    bearer_headers = {
+        "Authorization": os.environ["BASIC_AUTH"]
+
+    }
+
+    response_post = requests.post(
+        SHEETY_ENDPOINT,
+        json=SHEETY_PARAMS,
+        headers=bearer_headers
+    )
     print(response_post.text)
+
+
+
+
